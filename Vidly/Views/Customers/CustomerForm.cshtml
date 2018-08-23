@@ -1,0 +1,34 @@
+﻿@model Vidly.ViewModels.CustomerFormViewModel
+@{
+    ViewBag.Title = "New";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Customer</h2>
+@*In a using block the form gets disposed after, in this case beginform makes a <form> and dispose is </form>*@
+@*When the form is posted, the action Create is called in the Customers controller, /Customers/Create*@
+@using (Html.BeginForm("Save", "Customers")) {
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.Name)
+        @*Form control is a bootstrap class*@
+        @Html.TextBoxFor(m => m.Customer.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Customer.BirthDate)
+        @Html.TextBoxFor(m => m.Customer.BirthDate, "{0:d MMM yyyy}", new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @*Dit is membershiptypeID en geen membershiptype omdat het niet mogelijk is in form het object membership type te selecteren
+            dus dit gaat op basis van ID*@
+        @Html.LabelFor(m => m.Customer.MembershipTypeId)
+        @Html.DropDownListFor(m => m.Customer.MembershipTypeId, new SelectList(Model.MembershipTypes, "Id", "Name"), "Select MembershipType", new { @class = "form-control" })
+    </div>
+    <div class="checkbox">
+        <label>
+            @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsLetter) Subscribed to Newsletter?
+        </label>
+    </div>
+    @Html.HiddenFor(m => m.Customer.Id);
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
