@@ -9,11 +9,11 @@ using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
-    public class MovieController : Controller
+    public class MoviesController : Controller
     {
         ApplicationDbContext _context;
 
-        public MovieController()
+        public MoviesController()
         {
             _context = new ApplicationDbContext();
         }
@@ -57,7 +57,7 @@ namespace Vidly.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("Index", "Movie");
+            return RedirectToAction("Index", "Movies");
         }
 
         public ActionResult Edit(int id)
@@ -107,7 +107,7 @@ namespace Vidly.Controllers
 
 
 
-
+        /*
 
         public ActionResult Random()
         {
@@ -151,10 +151,11 @@ namespace Vidly.Controllers
             return Content(String.Format("pageIndex={0}$sortBy{1}", pageIndex, sortBy));
         }
 
-        [Route("movie/released/{year:regex(^\\d{4}$)}/{month:regex(^\\d{2}$):range(1, 12)}")]
+        [Route("movies/released/{year:regex(^\\d{4}$)}/{month:regex(^\\d{2}$):range(1, 12)}")]
         public ActionResult ByReleaseDate(int year, int month)
         {
             return Content(year + "/" + month);
         }
+        */
     }
 }

@@ -10,11 +10,11 @@ using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
-    public class CustomerController : Controller
+    public class CustomersController : Controller
     {
         private ApplicationDbContext _context;
 
-        public CustomerController()
+        public CustomersController()
         {
             // To access the database
             _context = new ApplicationDbContext();
@@ -74,7 +74,7 @@ namespace Vidly.Controllers
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
             _context.SaveChanges();
-            return RedirectToAction("Index", "Customer");
+            return RedirectToAction("Index", "Customers");
         }
 
         // When a customer is clicked the edit action gets executed and a form will show where the customer can be edited.
