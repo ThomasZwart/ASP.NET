@@ -13,10 +13,12 @@ namespace Vidly
     {
         protected void Application_Start()
         {
+            // This one has to be in the beginning, else it won't work
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);        
         }
     }
 }

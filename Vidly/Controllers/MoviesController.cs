@@ -92,27 +92,6 @@ namespace Vidly.Controllers
             return View(movie);
         }
 
-
-        [Route("aap/niks")]
-        public ActionResult ByReleaseDate()
-        {
-            return Content("nee");
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         /*
 
         public ActionResult Random()
