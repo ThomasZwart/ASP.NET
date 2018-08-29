@@ -16,38 +16,17 @@
     white-space: normal;
 }
 
+
+
 .navbar-brand{
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .nav.navbar-nav{
     font-size: 18px;
 }
 
-header{
-    margin-top:20px;
-    font-size: 20px;
-}
 
-#movie-list {
-    list-style: none;
-    border: 1px solid lightgrey;
-}
-
-#customer-list {
-    list-style: none;
-    border: 1px solid lightgrey;
-}
-
-.customer-name{
-    color: black;
-    border-bottom: 1px solid lightgrey
-}
-
-.movie-name {
-    color: black;
-    border-bottom: 1px solid lightgrey
-}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -56,4 +35,11 @@ textarea {
     max-width: 280px;
 }
 
+.field-validation-error{
+    color:red;
+}
+
+.input-validation-error{
+    border: 2px solid red;
+}
 

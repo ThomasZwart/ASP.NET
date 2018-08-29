@@ -10,11 +10,11 @@ using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomerController : Controller
     {
         private ApplicationDbContext _context;
 
-        public CustomersController()
+        public CustomerController()
         {
             // To access the database
             _context = new ApplicationDbContext();
@@ -38,17 +38,29 @@ namespace Vidly.Controllers
             var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel() {
                 MembershipTypes = membershipTypes,
+                // So that ID is not null but initialised as 0, this is because ID is 
+                // not a nullable property and so the customer won't be valid if the ID is null
+                Customer = new Customer()
             };
             return View("CustomerForm", viewModel);
         }
-
+    
         // The action is only accessable by a 'Post' and not by 'Get'
         [HttpPost]
+        [ValidateAntiForgeryToken]
         // De Customer parameter wordt meegegeven door het form te posten
         // Het object in de view is een viewmodel, maar omdat alles geprefixed is met Customer in de inputs (met lambda expressies) 
         // Werkt alleen customer hier ook, dit heet 'model binding'
         public ActionResult Save(Customer customer)
         {
+            // If the form values are not valid, user will be send back to the form with validation error messages
+            if (!ModelState.IsValid) {
+                var viewModel = new CustomerFormViewModel() {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList(),
+                };
+                return View("CustomerForm", viewModel);
+            }
             // A new customer has an ID of 0
             if (customer.Id == 0) {
                 _context.Customers.Add(customer);
@@ -62,7 +74,7 @@ namespace Vidly.Controllers
                 customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
             }
             _context.SaveChanges();
-            return RedirectToAction("Index", "Customers");
+            return RedirectToAction("Index", "Customer");
         }
 
         // When a customer is clicked the edit action gets executed and a form will show where the customer can be edited.

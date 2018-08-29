@@ -9,11 +9,11 @@ using System.Data.Entity;
 
 namespace Vidly.Controllers
 {
-    public class MoviesController : Controller
+    public class MovieController : Controller
     {
         ApplicationDbContext _context;
 
-        public MoviesController()
+        public MovieController()
         {
             _context = new ApplicationDbContext();
         }
@@ -33,8 +33,17 @@ namespace Vidly.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Movie movie)
         {
+            // If the form values are not valid, user will be send back to the form with validation error messages
+            if (!ModelState.IsValid) {
+                var viewModel = new MoviesFormViewModel(movie) {
+                    Genres = _context.Genres.ToList(),
+                };
+                return View("MoviesForm", viewModel);
+            }
+
             if (movie.Id == 0){
                 movie.DateAdded = DateTime.Now;
                 _context.Movies.Add(movie);
@@ -48,7 +57,7 @@ namespace Vidly.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("Index", "Movies");
+            return RedirectToAction("Index", "Movie");
         }
 
         public ActionResult Edit(int id)
@@ -59,8 +68,7 @@ namespace Vidly.Controllers
                 return HttpNotFound();
             }
 
-            var viewModel = new MoviesFormViewModel() {
-                Movie = movie,
+            var viewModel = new MoviesFormViewModel(movie) {
                 Genres = _context.Genres.ToList(),
             };
 

@@ -18,15 +18,23 @@ namespace Vidly.Models
 
         // Required on the ID, not the genre
         [Display(Name = "Genre")]
-        [Required]
+        [Required(ErrorMessage = "Please select a genre")]
         public byte GenreId { get; set; }
 
         public DateTime DateAdded { get; set; }
 
         [Display(Name = "Release Date")]
-        public DateTime ReleaseDate { get; set; }
+        [Required]
+        public DateTime? ReleaseDate { get; set; }
 
         [Display(Name = "Number in Stock")]
+        [Range(1, 20)]
         public byte NumberInStock { get; set; }
+
+        public string Title {
+            get {
+                return Id != 0 ? "Edit Movie" : "New Movie";
+            }
+        }
     }
 }

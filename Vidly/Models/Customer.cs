@@ -10,7 +10,7 @@ namespace Vidly.Models
     {
         public int Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter customer's name")]
         [StringLength(255)]
         public string Name { get; set; }
 
@@ -19,11 +19,13 @@ namespace Vidly.Models
         public MembershipType MembershipType { get; set; }
 
         [Display(Name = "Membership Type")]
+        [Required(ErrorMessage = "Please select a membership type")]
         // Now replaces membershiptype in the table with a corresponding ID
         public byte MembershipTypeId { get; set; }
 
         // So that the @Html.LabelFor(m => m.BirthDate) displays this text
         [Display(Name = "Date of Birth")]
+        [Min18YearIfAMember]
         public DateTime? BirthDate { get; set; }
     }
 }
