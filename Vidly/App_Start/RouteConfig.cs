@@ -11,7 +11,7 @@ namespace Vidly {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
-           // routes.MapMvcAttributeRoutes();
+            routes.MapMvcAttributeRoutes();
 
             // Eigen route maken
             // Specifiekere route moet boven en meer generic onder
