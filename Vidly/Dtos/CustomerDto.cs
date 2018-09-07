@@ -21,6 +21,8 @@ namespace Vidly.Dtos
         // Now replaces membershiptype in the table with a corresponding ID
         public byte MembershipTypeId { get; set; }
 
+        public MembershipTypeDto MembershipType { get; set; }
+
         // So that the @Html.LabelFor(m => m.BirthDate) displays this text 
       //  [Min18YearIfAMember]
         public DateTime? BirthDate { get; set; }

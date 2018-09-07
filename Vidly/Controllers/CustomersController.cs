@@ -27,11 +27,14 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            // Query is executed by the ToList() method, because it iterates
+            
+            // Without api and with html markup being generated on the server use this:
+          /*  // Query is executed by the ToList() method, because it iterates
             var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-
             return View(customers);
-        }
+           */
+            return View();
+        }     
 
         public ActionResult New()
         {
@@ -104,6 +107,15 @@ namespace Vidly.Controllers
             }
 
             return View(customer);
+        }
+
+        public ActionResult Delete(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            _context.Customers.Remove(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
         }
     }
 }
