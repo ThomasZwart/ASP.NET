@@ -36,6 +36,7 @@ namespace Vidly.Controllers
             return View();
         }     
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -81,6 +82,7 @@ namespace Vidly.Controllers
         }
 
         // When a customer is clicked the edit action gets executed and a form will show where the customer can be edited.
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
@@ -109,9 +111,14 @@ namespace Vidly.Controllers
             return View(customer);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Delete(int id)
         {
             var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null) {
+                return HttpNotFound();
+            }
 
             _context.Customers.Remove(customer);
             _context.SaveChanges();

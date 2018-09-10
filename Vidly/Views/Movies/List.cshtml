@@ -12,7 +12,7 @@
 <table id="movies" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Movieblabla</th>
+            <th>Movie</th>
             <th>Genre</th>
             <th>Delete</th>
         </tr>
@@ -50,7 +50,7 @@
                 ]
             });
 
-            $("#movies").on("click", "js-delete", function () {
+            $("#movies").on("click", ".js-delete", function () {
                 var $button = $(this);
                 bootbox.confirm("Are you sure?", function (result) {
                     if (result) {
