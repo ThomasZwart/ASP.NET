@@ -4,7 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>New Customer</h2>
+<h2>@Model.Title</h2>
 @*In a using block the form gets disposed after, in this case beginform makes a <form> and dispose is </form>*@
 @*When the form is posted, the action Create is called in the Customers controller, /Customers/Create*@
 @using (Html.BeginForm("Save", "Customers")) {
@@ -37,6 +37,7 @@
     <button type="submit" class="btn btn-primary">Save</button>
 }
 
+@*Client side validation, pass the adress of a bundle and all files in the bundle will be executed*@
 @section scripts
 {
     @Scripts.Render("~/bundles/jqueryval")

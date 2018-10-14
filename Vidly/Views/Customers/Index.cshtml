@@ -10,13 +10,14 @@
 <table id="customers" class="table table-bordered table-hover">
     <thead>
         <tr>
-            <th>Customerbbb</th>
+            <th>Customer</th>
             <th>Membership Type</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
         @*
+            // Without API and client side development use this
             @foreach (var customer in Model) {
                 <tr>
                     <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>

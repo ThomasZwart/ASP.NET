@@ -8,6 +8,7 @@
 <h2>@Model.Title</h2>
 
 @using (Html.BeginForm("Save", "Movies")) {
+    @Html.ValidationSummary()
     <div class="form-group">
         @Html.LabelFor(m => m.Name)
         @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })

@@ -7,6 +7,8 @@ using Vidly.Models;
 using Vidly.ViewModels;
 // For using Include()
 using System.Data.Entity;
+using System.Runtime.Caching;
+using System.Diagnostics;
 
 namespace Vidly.Controllers
 {
@@ -27,12 +29,19 @@ namespace Vidly.Controllers
 
         public ActionResult Index()
         {
-            
+            // Store genres in the cache if it is the first time executing this page
+            if (MemoryCache.Default["Genres"] == null) {
+                MemoryCache.Default.Add(new CacheItem("Genres", _context.Genres.ToList()), new CacheItemPolicy());
+            }
+            // Get genres from the cache
+            var genres = MemoryCache.Default["Genres"] as IEnumerable<Genre>;
+
+
             // Without api and with html markup being generated on the server use this:
-          /*  // Query is executed by the ToList() method, because it iterates
-            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
-            return View(customers);
-           */
+            /*  // Query is executed by the ToList() method, because it iterates
+              var customers = _context.Customers.Include(c => c.MembershipType).ToList();
+              return View(customers);
+             */
             return View();
         }     
 
@@ -44,6 +53,7 @@ namespace Vidly.Controllers
                 MembershipTypes = membershipTypes,
                 // So that ID is not null but initialised as 0, this is because ID is 
                 // not a nullable property and so the customer won't be valid if the ID is null
+                // Another solution is to get all the customer props in the customer viewmodel and not a reference to customer
                 Customer = new Customer()
             };
             return View("CustomerForm", viewModel);

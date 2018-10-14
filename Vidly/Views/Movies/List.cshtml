@@ -52,6 +52,7 @@
 
             $("#movies").on("click", ".js-delete", function () {
                 var $button = $(this);
+                // Bootbox installed with package manager console and added in bundles config
                 bootbox.confirm("Are you sure?", function (result) {
                     if (result) {
                         $.ajax({
