@@ -32,7 +32,6 @@
 </form>
 
 @section scripts{
-
     @Scripts.Render("~/bundles/jqueryval")
     <script>
         // Twitter Type Ahead plug in
@@ -41,6 +40,7 @@
             var vm = {
                 movieIds: []
             };
+
             var customers = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
                 queryTokenizer: Bloodhound.tokenizers.whitespace,
@@ -57,10 +57,9 @@
                 name: 'customers',
                 display: 'name',
                 source: customers
-            }).on("typeahead:select", function (e, customer) {
-                vm.customerId = customer.id;
-
-                });
+                }).on("typeahead:select", function (e, customer) {
+                    vm.customerId = customer.id;
+            });
 
             var movies = new Bloodhound({
                 datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
@@ -111,7 +110,7 @@
                             $("#movies").empty();
 
                             vm = {
-                                movieIds=[]
+                                movieIds=[],
                             };
 
                             validator.resetForm();
