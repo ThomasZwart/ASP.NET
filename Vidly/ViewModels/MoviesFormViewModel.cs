@@ -26,9 +26,8 @@ namespace Vidly.ViewModels
         public DateTime? ReleaseDate { get; set; }
 
         [Display(Name = "Number in Stock")]
-        [Range(1, 20)]
         [Required]
-        public byte? NumberInStock { get; set; }
+        public int NumberInStock { get; set; }
 
         public string Title {
             get {

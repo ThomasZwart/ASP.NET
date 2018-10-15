@@ -10,7 +10,7 @@ namespace Vidly {
             filters.Add(new AuthorizeAttribute());
 
             // The site can only be accessed via Https protocol
-            filters.Add(new RequireHttpsAttribute());
+         //   filters.Add(new RequireHttpsAttribute());
         }
     }
 }

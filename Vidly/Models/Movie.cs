@@ -28,8 +28,9 @@ namespace Vidly.Models
         public DateTime ReleaseDate { get; set; }
 
         [Display(Name = "Number in Stock")]
-        [Range(1, 20)]
-        public byte NumberInStock { get; set; }
+        public int NumberInStock { get; set; }
+
+        public int NumberAvailable { get; set; }
 
         public string Title {
             get {
